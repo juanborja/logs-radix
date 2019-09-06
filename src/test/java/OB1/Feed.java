@@ -18,11 +18,11 @@ import java.util.Random;
  * @author juan
  */
 public class Feed {
-    static final String NOMBREUSUARIO = "Prueba";
+    static final String [] USUARIOS = {"carlos", "laura", "pedro","maria","ricardo","sofia", "usuario1", "usuario2", "usuario3"};
     static final int CANTREGISTROS = 100000;
     static final String FECHAINICIO = "2014-09-15 15:03:23";
     static final String FECHAFIN = "2016-09-15 15:03:23";
-    static final String NOMBRE_ARCHIVO = "/home/juan/Documentos/unco/Analisis de algoritmos/AnalisisAlgoritmosMaven/src/main/java/inout/"+ NOMBREUSUARIO+".txt";
+    static final String NOMBRE_ARCHIVO = "/home/juan/Documentos/unco/Analisis de algoritmos/AnalisisAlgoritmosMaven/src/main/java/inout/log.txt";
     public static String[] leerArchivo(){
     	String [] arreglo = new String[CANTREGISTROS];
     	try{
@@ -44,7 +44,8 @@ public class Feed {
     		BufferedWriter buff = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO));
     		Random generador = new Random();
     		for (int i = 0; i < CANTREGISTROS  ; i++){
-    			String log = generarFechaRandom()+"--"+NOMBREUSUARIO;
+                        int iusuario= ((int) (Math.random() * USUARIOS.length));
+    			String log = generarFechaRandom()+"--"+USUARIOS[iusuario];
     			buff.write( log +"\n");
     		}
     		buff.close();

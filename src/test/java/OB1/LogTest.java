@@ -9,6 +9,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
@@ -44,6 +45,13 @@ public class LogTest {
         Arrays.sort(logJava);
         assertArrayEquals(logRadix,logJava);
         
+    }
+    /*Verifico que cada elemento sea menor al anterior*/
+    @Test
+    public void TestExa(){
+        String[] logRadix = Feed.leerArchivo();
+        Log.ordenarRadix(logRadix);        
+        for(int i=0;i+1<logRadix.length;i++)assertTrue(logRadix[i].compareTo(logRadix[i+1])>0);     
     }
     
 }
