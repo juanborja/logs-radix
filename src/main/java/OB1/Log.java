@@ -30,7 +30,7 @@ class Log {
   
     // A function to do counting sort of arr[] according to 
     // the digit represented by exp. 
-    static void countSort(long arr[], int n, int exp) { 
+    static void countSort(long arr[], int n, long exp) { 
         long output[] = new long[n]; // output array 
         int i; 
         int count[] = new int[10]; 
@@ -71,23 +71,23 @@ class Log {
     static void ordenarRadix(long arr[], int n) { 
         // Find the maximum number to know number of digits 
         long m = getMax(arr, n); 
-  
+        //System.out.println("Maximo: "+m);
         // Do counting sort for every digit. Note that instead 
         // of passing digit number, exp is passed. exp is 10^i 
         // where i is current digit number 
-        for (int exp = 1; m/exp > 0; exp *= 10) 
+        for (long exp = 1; m/exp > 0; exp *= 10) 
             countSort(arr, n, exp); 
     } 
     
     public static void main (String [] args){
-        /*String[] log= Feed.leerArchivo();
+        String[] log= Feed.leerArchivoParcial(10);
         long[] logRadix = Utiles.convertToLong(log);
         long[] logJava = logRadix.clone();
         Log.ordenarRadix(logRadix, logRadix.length);
         Arrays.sort(logJava);     
         System.err.println(Arrays.toString(log));
         System.err.println(Arrays.toString(logRadix));
-        System.err.println(Arrays.toString(logJava));*/
+        System.err.println(Arrays.toString(logJava));
         int[] escalas = new int[1000];
         int inicial =0;
         for(int i=0;i<escalas.length;i++){           
