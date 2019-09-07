@@ -26,6 +26,8 @@ public class Medicion {
     public static final String ARCHIVO_RADIX = "/home/juan/Documentos/unco/Analisis de algoritmos/AnalisisAlgoritmosMaven/src/main/java/data/radix.txt";
     public static final String ARCHIVO_HEAP = "/home/juan/Documentos/unco/Analisis de algoritmos/AnalisisAlgoritmosMaven/src/main/java/data/heap.txt";
     public static final String ARCHIVO_SELECTION = "/home/juan/Documentos/unco/Analisis de algoritmos/AnalisisAlgoritmosMaven/src/main/java/data/selection.txt";
+    public static final String ARCHIVO_N = "/home/juan/Documentos/unco/Analisis de algoritmos/AnalisisAlgoritmosMaven/src/main/java/data/n.txt";
+    public static final String ARCHIVO_LOGN = "/home/juan/Documentos/unco/Analisis de algoritmos/AnalisisAlgoritmosMaven/src/main/java/data/logn.txt";
     /*
     Genero datos para graficos y los guardo en archivos
     parametros
@@ -112,6 +114,40 @@ public class Medicion {
             System.err.println("Error leyendo o escribiendo en algun archivo.");
         }
         return ret;
+    }
+    // 0 --> genera n, 1 genera n*log n
+    public static long[] generarPatron(int metodo,int[]escalas,String archivo, float k){
+        long[] valores = new long[escalas.length];
+        try {
+            
+            Arrays.sort(escalas);
+            BufferedWriter buff = new BufferedWriter(new FileWriter(archivo));
+            buff.write(escalas.length+"\n");
+            for (int i=0;i<escalas.length;i++){
+                switch(metodo){
+                    case 0:
+                       valores[i] = (long) ((long)escalas[i]*k);
+                       break;
+                    case 1:
+                        valores[i] = (long) (Math.log(escalas[i])*k);
+                        break;
+                    case 2:
+                        //valores[i] = (long) ((long)i*k);
+                        break;
+                    default:
+                        
+                        break;
+                }
+                
+              
+                buff.write( escalas[i]+","+valores[i] +"\n");
+    		}
+    		buff.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Utiles.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return valores;
     }
     
 }
