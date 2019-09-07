@@ -5,6 +5,7 @@
  */
 package OB1;
 
+import inout.Feed;
 import java.util.Arrays;
 
 /**
@@ -13,16 +14,14 @@ import java.util.Arrays;
  */
 class Log {
 
-    static void ordenarRadix(String[] logRadix) {
-        
-    }
+   
 
-    static void ordenarSeleccion(String[] logSeleccion) {
+    static void ordenarSeleccion(long[] logSeleccion) {
         
     }
     
-     static int getMax(int arr[], int n) { 
-        int mx = arr[0]; 
+     static long getMax(long arr[], int n) { 
+        long mx = arr[0]; 
         for (int i = 1; i < n; i++) 
             if (arr[i] > mx) 
                 mx = arr[i]; 
@@ -31,15 +30,21 @@ class Log {
   
     // A function to do counting sort of arr[] according to 
     // the digit represented by exp. 
-    static void countSort(int arr[], int n, int exp) { 
-        int output[] = new int[n]; // output array 
+    static void countSort(long arr[], int n, int exp) { 
+        long output[] = new long[n]; // output array 
         int i; 
         int count[] = new int[10]; 
         Arrays.fill(count,0); 
   
         // Store count of occurrences in count[] 
-        for (i = 0; i < n; i++) 
-            count[ (arr[i]/exp)%10 ]++; 
+        for (i = 0; i < n; i++) {
+            int aux =(int) ((arr[i]/exp)%10);
+            //System.out.println(arr[i]+" - "+exp+" - "+aux);
+            count[ aux ]++; 
+        }
+            
+            
+            
   
         // Change count[i] so that count[i] now contains 
         // actual position of this digit in output[] 
@@ -49,8 +54,10 @@ class Log {
         // Build the output array 
         for (i = n - 1; i >= 0; i--) 
         { 
-            output[count[ (arr[i]/exp)%10 ] - 1] = arr[i]; 
-            count[ (arr[i]/exp)%10 ]--; 
+            int aux = (int)((arr[i]/exp)%10);
+            output[(int)count[aux ] - 1] = arr[i];
+            int aux2 = (int)((arr[i]/exp)%10);
+            count[ aux2 ]--; 
         } 
   
         // Copy the output array to arr[], so that arr[] now 
@@ -61,9 +68,9 @@ class Log {
   
     // The main function to that sorts arr[] of size n using 
     // Radix Sort 
-    static void radixsort(int arr[], int n) { 
+    static void ordenarRadix(long arr[], int n) { 
         // Find the maximum number to know number of digits 
-        int m = getMax(arr, n); 
+        long m = getMax(arr, n); 
   
         // Do counting sort for every digit. Note that instead 
         // of passing digit number, exp is passed. exp is 10^i 
@@ -73,11 +80,23 @@ class Log {
     } 
     
     public static void main (String [] args){
-        int []test ={20200112,20191230,20210505,20221106};
-        System.err.println(Arrays.toString(test));
-        radixsort(test, test.length);
-        
-        System.err.println(Arrays.toString(test));
+        /*String[] log= Feed.leerArchivo();
+        long[] logRadix = Utiles.convertToLong(log);
+        long[] logJava = logRadix.clone();
+        Log.ordenarRadix(logRadix, logRadix.length);
+        Arrays.sort(logJava);     
+        System.err.println(Arrays.toString(log));
+        System.err.println(Arrays.toString(logRadix));
+        System.err.println(Arrays.toString(logJava));*/
+        int[] escalas = new int[1000];
+        int inicial =0;
+        for(int i=0;i<escalas.length;i++){           
+            inicial=inicial+1000;
+            escalas[i]=inicial;
+        }
+        long [] valores=Utiles.medirEmpirico(escalas);
+        System.out.println(Arrays.toString(escalas));
+        System.out.println(Arrays.toString(valores));
         
     }
 }
